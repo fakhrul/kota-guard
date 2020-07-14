@@ -1,1 +1,1 @@
-# kota-guard
+# kota-community
