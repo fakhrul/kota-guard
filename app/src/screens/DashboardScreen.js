@@ -5,32 +5,6 @@ import {colors} from  "../utils";
 import {createAppContainer} from "react-navigation";
 import { createMaterialTopTabNavigator } from "react-navigation-tabs";
 
-
-// const HomeTabNavigator = createMaterialTopTabNavigator(
-//   {
-//     MostActive: {
-//       screen: MostActiveScreen,
-//       navigationOptions: {
-//         tabBarLabel: 'Most Active',
-//       },
-//     },
-//     TopGainer: {
-//       screen: TopGainerScreen,
-//       navigationOptions: {
-//         tabBarLabel: 'Top Gainer',
-//       },
-//     },
-//     TopLooser: {
-//       screen: TopLooserScreen,
-//       navigationOptions: {
-//         tabBarLabel: 'Top Looser',
-//       },
-//     },
-//   },
-// );
-
-// const Tabs = createAppContainer(HomeTabNavigator);
-
 const DashboardScreen = ({navigation}) => {
   
   return (

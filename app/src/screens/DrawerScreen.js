@@ -99,18 +99,7 @@ const DrawerScreen = ({ navigation }) => {
             route="homeFlow"
             icon={<Entypo name="home" size={20} color={colors.text.title} />}
           ></SidebarLink>
-          {/* <SidebarLink
-            navigation={navigation}
-            title="Notifications"
-            route="Notification"
-            icon={
-              <MaterialCommunityIcons
-                name="bell-alert"
-                size={20}
-                color={colors.text.title}
-              ></MaterialCommunityIcons>
-            }
-          ></SidebarLink> */}
+
          <Button title="Force Logout" onPress={signout}></Button>
 
           <Divider />

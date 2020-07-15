@@ -233,11 +233,25 @@ communityFlow.navigationOptions = () => {
   };
 };
 
-visitorFlow.navigationOptions = () => {
-  return {
-    headerShown: false,
-  };
+// visitorFlow.navigationOptions = () => {
+//   return {
+//     headerShown: false,
+//   };
+// };
+
+
+visitorFlow.navigationOptions = {
+  title: "Visitor",
+  tabBarIcon: (
+    <FontAwesome
+      name="car"
+      size={20}
+      color={colors.text.title}
+    ></FontAwesome>
+  ),
 };
+
+
 
 VisitorScreen.navigationOptions = () => {
   return {
@@ -401,13 +415,14 @@ const switchNavigator = createSwitchNavigator({
   userFlow: createDrawerNavigator(
     {
       homeFlow: createBottomTabNavigator({
-        //dashboardFlow,
-        // stockFlow,
-        streamFlow,
+        dashboardFlow,
+        //  stockFlow,
+         streamFlow,
         myBillingFlow,
         notificationFlow,
-        connectionFlow,
-        chatFlow,
+        visitorFlow,
+         connectionFlow,
+         chatFlow,
       }),
       profileFlow: createStackNavigator({
         Profile: MyProfileScreen,
