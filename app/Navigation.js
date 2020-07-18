@@ -57,6 +57,7 @@ import ResidentRegistrationScreen from "./src/screens/ResidentRegistrationScreen
 import CommunityRegistrationScreen from "./src/screens/CommunityRegistrationScreen";
 import MyBillingScreen from "./src/screens/MyBillingScreen";
 import BillingAddScreen from "./src/screens/BillingAddScreen";
+import VisitorAddScreen from "./src/screens/VisitorAddScreen";
 
 const dashboardFlow = createStackNavigator({
   Dashboard: DashboardScreen,
@@ -144,6 +145,7 @@ const settingFlow = createStackNavigator({
 
 const visitorFlow = createStackNavigator({
   Visitor: VisitorScreen,
+  VisitorAdd: VisitorAddScreen,
 });
 
 const chatFlow = createStackNavigator({
@@ -254,6 +256,11 @@ visitorFlow.navigationOptions = {
 
 
 VisitorScreen.navigationOptions = () => {
+  return {
+    headerShown: false,
+  };
+};
+VisitorAddScreen.navigationOptions = () => {
   return {
     headerShown: false,
   };
