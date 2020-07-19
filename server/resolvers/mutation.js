@@ -13,6 +13,8 @@ const Message = require("../model/message");
 const Notification = require("../model/notification");
 const Community = require("../model/community");
 const Service = require("../model/service");
+const Unit = require("../model/unit");
+const Visitor = requre("../model/visitor");
 
 const addPost = (id, caption, uri, authorId) =>
   new Promise((resolve, reject) => {
@@ -635,7 +637,29 @@ const resolvers = {
       );
     });
   },
-
+  addUnit: (_, args) => {
+    return new Promise((resolve, reject) => {
+      const id = mongoose.Types.ObjectId();
+      Unit.create(
+        {
+          _id: id,
+          code: args.code,
+          name: args.name,
+          address: args.address,
+          city: args.city,
+          state: args.state,
+          postcode: args.postcode,
+          country: args.country,
+          logo: args.logo,
+          creator: args.userId
+        },
+        (err, result) => {
+          if (err) reject(err);
+          else resolve(result);
+        }
+      );
+    });
+  },
 };
 
 export default resolvers;
