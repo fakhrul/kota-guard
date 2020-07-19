@@ -32,6 +32,7 @@ const typeDefs = gql`
     service(id: String!): Service
     visitorsByCommunity(communityId: String!): [Visitor]
     visitor(id: String!): Visitor
+    unit(id: String!): Unit
   }
   type Subscription {
     post(id: String!): Post
@@ -78,8 +79,8 @@ const typeDefs = gql`
     addCommunity(userId: String!, code: String!, name: String!, address: String, city: String, state: String, postcode: String, country: String, logo: String) : Community!
     addResident(userId: String!, communityId: String!, residentId: String!): Community!
     addService(userId:  String!, communityId:  String!, name:  String!, amount:  String!,  description:  String) : Service!
-    addUnit(userId:  String!, communityId:  String!, name:  String!) : Unit!
-    updateUnit(id:  String!, name: String!) : Unit!
+    addUnit(userId:  String!, communityId:  String!, code: String!, name:  String!, residentId: String) : Unit
+    updateUnit(id:  String!, name: String!) : Unit
     addVisitor(userId: String!, communityId: String!, visitorName: String!, visitDate: DateTime!, plateNumber: String, remarks: String, unitId: String!) : Visitor!
   }
 
@@ -157,7 +158,11 @@ const typeDefs = gql`
   }
   type Unit {
     id: ID!
+    code: String
     name: String!
+    community: Community!
+    resident: User
+    createdAt: DateTime!
   }
   type Post {
     id: ID!

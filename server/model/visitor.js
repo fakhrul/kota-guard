@@ -3,20 +3,31 @@ const Schema = mongoose.Schema;
 
 const schema = new Schema(
     {
-        code: {
+        visitorName: {
             type: String,
         },
-        name: {
+        visitDate: {
+            type: Date,
+        },
+        plateNumber: {
+            type: String,
+        },
+        remarks: {
             type: String,
         },
         community: {
             type: Schema.Types.ObjectId,
             ref: 'Community'
         },
-        resident: {
+        creator: {
             type: Schema.Types.ObjectId,
             ref: 'User'
+        },
+        unit: {
+            type: Schema.Types.ObjectId,
+            ref: 'Unit'
         }
+
     },
     { timestamps: true }
 );

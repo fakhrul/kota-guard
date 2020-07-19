@@ -14,7 +14,7 @@ const Notification = require("../model/notification");
 const Community = require("../model/community");
 const Service = require("../model/service");
 const Unit = require("../model/unit");
-const Visitor = requre("../model/visitor");
+const Visitor = require("../model/visitor");
 
 const addPost = (id, caption, uri, authorId) =>
   new Promise((resolve, reject) => {
@@ -57,6 +57,30 @@ const addMessageToList = (chatId, messageId) =>
       }
     );
   });
+
+const addNewUnit = (unitId, communityId, code, name) =>
+  new Promise((resolve, reject) => {
+    Unit.create(
+      { _id: unitId, community: communityId, code: code, name: name },
+      (err, result) => {
+        if (err) reject(err);
+        else resolve(result);
+      }
+    );
+  });
+
+const pushUnitToCommunity = (unitId, communityId) =>
+  new Promise((resolve, reject) => {
+    Community.update(
+      { _id: communityId },
+      { $push: { units: unitId } },
+      (err, result) => {
+        if (err) reject(err);
+        else resolve(result);
+      }
+    );
+  });
+
 
 const isHandleExist = (handleName) => {
   User.findOne({ handle: handleName }, (error, userFound) => {
@@ -638,27 +662,20 @@ const resolvers = {
     });
   },
   addUnit: (_, args) => {
-    return new Promise((resolve, reject) => {
-      const id = mongoose.Types.ObjectId();
-      Unit.create(
-        {
-          _id: id,
-          code: args.code,
-          name: args.name,
-          address: args.address,
-          city: args.city,
-          state: args.state,
-          postcode: args.postcode,
-          country: args.country,
-          logo: args.logo,
-          creator: args.userId
-        },
-        (err, result) => {
-          if (err) reject(err);
-          else resolve(result);
-        }
-      );
-    });
+    const unitId = mongoose.Types.ObjectId();
+    Promise.all([
+        addNewUnit(unitId, args.communityId, args.code, args.name),
+      pushUnitToCommunity(unitId, args.communityId),
+    ]).then((result) => result[0]);
+
+  return Unit.findById(
+      { _id: unitId },
+      async (error, found) => {
+        if (error) throw new Error(error);
+        return found;
+      }
+    );
+
   },
 };
 
