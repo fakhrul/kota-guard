@@ -30,6 +30,8 @@ const typeDefs = gql`
     community(id: String!): Community
     servicesByCommunity(communityId: String!): [Service]
     service(id: String!): Service
+    visitorsByCommunity(communityId: String!): [Visitor]
+    visitor(id: String!): Visitor
   }
   type Subscription {
     post(id: String!): Post
@@ -73,9 +75,12 @@ const typeDefs = gql`
     updateLastSeen(userId: String!) : User!
     deleteNotification(notificationId: String!) : Notification
     updateFcmToken(userId: String!, fcmToken: String!) : User!
-    addCommunity(userId: String!, name: String!, address: String, city: String, state: String, postcode: String, country: String, logo: String) : Community!
+    addCommunity(userId: String!, code: String!, name: String!, address: String, city: String, state: String, postcode: String, country: String, logo: String) : Community!
     addResident(userId: String!, communityId: String!, residentId: String!): Community!
     addService(userId:  String!, communityId:  String!, name:  String!, amount:  String!,  description:  String) : Service!
+    addUnit(userId:  String!, communityId:  String!, name:  String!) : Unit!
+    updateUnit(id:  String!, name: String!) : Unit!
+    addVisitor(userId: String!, communityId: String!, visitorName: String!, visitDate: DateTime!, plateNumber: String, remarks: String, unitId: String!) : Visitor!
   }
 
   type Stock {
@@ -117,6 +122,7 @@ const typeDefs = gql`
   }
   type Community {
     id: ID!
+    code: String!
     name: String!
     address: String
     city: String
@@ -127,6 +133,7 @@ const typeDefs = gql`
     creator: User!
     createdAt: DateTime!
     residents: [User]
+    units: [Unit]
   }
   type Service {
     id: ID!
@@ -136,6 +143,21 @@ const typeDefs = gql`
     creator: User!
     community: Community!
     createdAt: DateTime!
+  }
+  type Visitor {
+    id: ID!
+    visitorName: String!
+    visitDate: DateTime!
+    plateNumber: String
+    remarks: String
+    unit: Unit!
+    creator: User!
+    community: Community!
+    createdAt: DateTime!
+  }
+  type Unit {
+    id: ID!
+    name: String!
   }
   type Post {
     id: ID!

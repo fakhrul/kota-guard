@@ -3,6 +3,9 @@ const Schema = mongoose.Schema;
 
 const schema = new Schema(
     {
+        code: {
+            type: String,
+        },
         name: {
             type: String,
         },
@@ -31,20 +34,12 @@ const schema = new Schema(
         residents: [{
             type: Schema.Types.ObjectId,
             ref: 'User'
+        }],
+        units: [{
+            type: Schema.Types.ObjectId,
+            ref: 'Unit'
         }]
-        // status: {
-        //     type: String,
-        // },
-        // residents: [{
-        //     type: Schema.Types.ObjectId,
-        //     ref: 'User'
-        // }],
-        // management: [{
-        //     type: Schema.Types.ObjectId,
-        //     ref: 'User'
-        // }]
-
-
+     
     },
     { timestamps: true }
 );

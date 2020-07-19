@@ -583,6 +583,7 @@ const resolvers = {
       Community.create(
         {
           _id: id,
+          code: args.code,
           name: args.name,
           address: args.address,
           city: args.city,

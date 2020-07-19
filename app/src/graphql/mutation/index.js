@@ -213,3 +213,10 @@ export const MUTATION_ADD_SERVICE = gql`
   }
 `;
 
+export const MUTATION_ADD_VISITOR = gql`
+  mutation AddVisitor($userId: String!, $communityId: String!, $visitorName: String!, $visitDate: DateTime!, $plateNumber: String, $remarks: String, $unitId: String, $unitName: String) {
+    addVisitor(userId: $userId, communityId: $communityId, visitorName: $visitorName, visitDate: $visitDate, plateNumber: $plateNumber, remarks: $remarks, unitId: $unitId, unitName: $unitName) {
+      id
+    }
+  }
+`;
