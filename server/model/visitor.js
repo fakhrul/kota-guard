@@ -26,6 +26,10 @@ const schema = new Schema(
         unit: {
             type: Schema.Types.ObjectId,
             ref: 'Unit'
+        },
+        host: {
+            type: Schema.Types.ObjectId,
+            ref: 'User'
         }
 
     },

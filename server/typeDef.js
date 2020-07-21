@@ -31,6 +31,7 @@ const typeDefs = gql`
     servicesByCommunity(communityId: String!): [Service]
     service(id: String!): Service
     visitorsByCommunity(communityId: String!): [Visitor]
+    visitorsByHost(hostId: String!): [Visitor]
     visitor(id: String!): Visitor
     unit(id: String!): Unit
   }
@@ -81,7 +82,7 @@ const typeDefs = gql`
     addService(userId:  String!, communityId:  String!, name:  String!, amount:  String!,  description:  String) : Service!
     addUnit(userId:  String!, communityId:  String!, code: String!, name:  String!, residentId: String) : Unit
     updateUnit(id:  String!, name: String!) : Unit
-    addVisitor(userId: String!, communityId: String!, visitorName: String!, visitDate: DateTime!, plateNumber: String, remarks: String, unitId: String!) : Visitor!
+    addVisitor(userId: String!, communityId: String!, visitorName: String!, visitDate: DateTime!, plateNumber: String, remarks: String, unitId: String!, hostId: String) : Visitor!
   }
 
   type Stock {
@@ -154,6 +155,7 @@ const typeDefs = gql`
     unit: Unit!
     creator: User!
     community: Community!
+    host: User!
     createdAt: DateTime!
   }
   type Unit {

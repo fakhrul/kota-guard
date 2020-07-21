@@ -258,6 +258,10 @@ export const QUERY_COMMUNITY = gql`
         id
         name
       }
+      units {
+        id
+        name
+      }
     }
   }
 `;
@@ -286,6 +290,28 @@ export const QUERY_SERVICE = gql`
     }
   }
 `;
+
+export const QUERY_VISITOR_BY_HOST = gql`
+  query VisitorsByHost($hostId: String!) {
+    visitorsByHost(hostId: $hostId) {
+      id
+      visitorName
+      visitDate
+      plateNumber
+      remarks
+      creator {
+        name
+      }
+      unit {
+        name
+      }
+      host {
+        name
+      }
+    }
+  }
+`;
+
 
 // export const QUERY_PAYMENT_BY_SERVICE = gql`
 //   query Payment($id: String)

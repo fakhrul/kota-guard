@@ -12,6 +12,7 @@ const Notification = require("../model/notification");
 const Community = require("../model/community");
 const Service = require("../model/service");
 const Unit = require("../model/unit");
+const Visitor = require("../model/visitor");
 
 const resolvers = {
   players: () =>
@@ -99,6 +100,8 @@ const resolvers = {
   servicesByCommunity: (_, args) => promisify(Service.find({ community: args.communityId})).then((result) => result),
   // service(id: String!): Service
   service: (_, args) => promisify(Service.findById(args.id)).then((result) => result),
+  visitorsByCommunity: (_, args) => promisify(Visitor.find({ community: args.communityId})).then((result) => result),
+  visitorsByHost: (_, args) => promisify(Visitor.find({ host: args.hostId})).then((result) => result),
   unit: (_, args) =>
     promisify(Unit.findById(args.id)).then((result) => result),
 };

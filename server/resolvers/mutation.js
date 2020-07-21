@@ -677,6 +677,29 @@ const resolvers = {
     );
 
   },
+  //    addVisitor(userId: $userId, communityId: $communityId, visitorName: $visitorName, visitDate: $visitDate, plateNumber: $plateNumber, remarks: $remarks, unitId: $unitId) {
+    addVisitor: (_, args) => {
+      return new Promise((resolve, reject) => {
+        const id = mongoose.Types.ObjectId();
+        Visitor.create(
+          {
+            _id: id,
+            community: args.communityId,
+            visitorName: args.visitorName,
+            visitDate: args.visitDate,
+            plateNumber: args.plateNumber,
+            remarks: args.remarks,
+            creator: args.userId,
+            unit: args.unitId,
+            host: args.hostId,
+          },
+          (err, result) => {
+            if (err) reject(err);
+            else resolve(result);
+          }
+        );
+      });
+    },
 };
 
 export default resolvers;

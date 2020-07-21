@@ -13,8 +13,9 @@ import Chat from "./chat";
 import Notification from "./notification"
 import Community from "./community";
 import Service from "./service";
+import Visitor from "./visitor";
 
-const resolvers = {User, Post, Comment, LikePost, Query, Stock, Message, Chat, Notification,Community, Service, Mutation, Subscription};
+const resolvers = {User, Post, Comment, LikePost, Query, Stock, Message, Chat, Notification,Community, Service, Mutation, Subscription, Visitor};
 
 console.log(resolvers);
 module.exports = resolvers;
