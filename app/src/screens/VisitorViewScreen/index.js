@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect, useRef } from "react";
-import {  ScrollView, View, Text, StyleSheet, Button, TextInput } from "react-native";
+import { ScrollView, View, Text, StyleSheet, Button, TextInput } from "react-native";
 import { Header } from "../../components";
 import { Context as AuthContext } from "../../context/AuthContext";
 import { QUERY_VISITOR } from "../../graphql/query";
@@ -10,6 +10,9 @@ import {
 } from "@apollo/react-hooks";
 import Remarks from "./components/Remarks";
 import RemarksInput from "./components/RemarksInput";
+import { colors } from "../../utils";
+import { responsiveWidth } from 'react-native-responsive-dimensions';
+import moment from "moment";
 
 const VisitorViewScreen = ({ navigation }) => {
     const { state } = useContext(AuthContext);
@@ -70,17 +73,24 @@ const VisitorViewScreen = ({ navigation }) => {
             },
         } = visitorData;
         // console.log(visitorData)
+const visitDateFormated= moment(visitDate).format("LLLL");
 
         content = (
-            < View >
-                <Text>Id {id}</Text>
-                <Text>Name {visitorName}</Text>
-                <Text>Date {visitDate}</Text>
-                <Text>Plate {plateNumber}</Text>
-                {/* <Text>Remarks {remarks}</Text> */}
-                <Text>Unit {unitName}</Text>
-                <Text>Creator {creatorName}</Text>
-                <Text>Host {hostName}</Text>
+            < View style={styles.content}>
+                <View style={{ height: 20 }}></View>
+                <Text>Visitor Name</Text>
+                <TextInput style={styles.textInput} editable={false} value={visitorName} ></TextInput>
+
+                <Text>Visit Date</Text>
+                <TextInput style={styles.textInput} editable={false} value={visitDateFormated} ></TextInput>
+                <Text>Plate Number</Text>
+                <TextInput style={styles.textInput} editable={false} value={plateNumber} ></TextInput>
+                <Text>Unit</Text>
+                <TextInput style={styles.textInput} editable={false} value={unitName} ></TextInput>
+                <Text>Hosted By</Text>
+                <TextInput style={styles.textInput} editable={false} value={hostName} ></TextInput>
+                <Text>Created By</Text>
+                <TextInput style={styles.textInput} editable={false} value={creatorName} ></TextInput>
                 <Remarks
                     navigation={navigation}
                     visitorId={visitorId}
@@ -117,5 +127,18 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: "#EFECF4",
     },
+    content: {
+        alignSelf: "center",
+        backgroundColor: colors.white,
+        width: responsiveWidth(98),
+    },
+    textInput: {
+        height: 40,
+        borderColor: 'gray',
+        borderWidth: 1,
+        marginVertical: 5,
+        marginHorizontal: 5,
+        padding: 5
+    }
 });
 export default VisitorViewScreen;

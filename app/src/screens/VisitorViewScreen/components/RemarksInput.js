@@ -54,14 +54,11 @@ const RemarksInput = ({ visitorId, scrollViewRef }) => {
   }
   return (
     <View style={styles.container}>
-      <NativeImage
-        uri={state.currentUser.avatar}
-        style={styles.commentAvatarImage}
-      />
+
       <TextInput
         style={styles.commentTextInput}
         value={remarks}
-        placeholder={`Add a remarks as ${state.currentUser.handle}...`}
+        placeholder={`Add a remarks...`}
         placeholderTextColor={colors.text02}
         onChangeText={setRemarks}
       />
@@ -91,10 +88,10 @@ const styles = StyleSheet.create({
     flex: 1,
     fontSize: 16,
     paddingVertical: Platform.select({ ios: 8, android: 6 }),
-    paddingHorizontal: 20,
+    paddingHorizontal: 10,
     backgroundColor: colors.placeholder,
     color: colors.text01,
-    borderRadius: 20,
+    borderRadius: 10,
     marginVertical: 5,
   },
   loading: {

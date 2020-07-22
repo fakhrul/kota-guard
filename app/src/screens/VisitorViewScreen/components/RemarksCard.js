@@ -55,7 +55,7 @@ const RemarksCard = ({
     };
 
     return (
-        <>
+        <View style={styles.container}>
             <Swipeable
                 ref={swipeableRef}
                 useNativeAnimations
@@ -68,18 +68,18 @@ const RemarksCard = ({
                     onPress={navigateToProfile}
                     style={styles.container}
                 >
-                    <Text style={styles.commentText}>{authorName}</Text>
-                    <Text style={styles.commentText}>{caption}</Text>
+                    {/* <Text style={styles.commentText}>{authorName}</Text>
+                    <Text style={styles.commentText}>{caption}</Text> */}
                     <View style={styles.info}>
                         <Text style={styles.timeText}>
-                            <Text style={styles.handleText}>{authorName} </Text>
+                            <Text style={styles.handleText}>Author: {authorName} </Text>
                             {parsedTime}
                         </Text>
-                        <Text style={styles.commentText}>{body}</Text>
+                        <Text style={styles.commentText}>Remarks: {body}</Text>
                     </View>
                 </TouchableOpacity>
             </Swipeable>
-        </>
+        </View>
     );
 };
 
@@ -88,8 +88,8 @@ const styles = StyleSheet.create({
         marginVertical: 5,
     },
     container: {
-        flexDirection: "row",
-        borderRadius: 5,
+        // flexDirection: "row",
+        // borderRadius: 5,
         marginVertical: 5,
     },
     avatarImage: {

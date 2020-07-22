@@ -13,6 +13,7 @@ import {
 import { Context as AuthContext } from "../../context/AuthContext";
 import { QUERY_COMMUNITY } from "../../graphql/query";
 import RNPickerSelect from 'react-native-picker-select';
+import { responsiveWidth } from 'react-native-responsive-dimensions';
 
 const VisitorAddScreen = ({ navigation }) => {
   const { state } = useContext(AuthContext);
@@ -69,8 +70,6 @@ const VisitorAddScreen = ({ navigation }) => {
       ...form,
       [input]: value,
     });
-
-    console.log(form);
   };
 
   const sendData = async () => {
@@ -112,59 +111,56 @@ const VisitorAddScreen = ({ navigation }) => {
     } = communityData;
     // console.log(community);
 
-    content = (<View>
-      <View style={{ height: 20 }}></View>
-      <Text>
-        Visitor Name
+    content = (
+      <View style={styles.content}>
+        <View style={{ height: 20 }}></View>
+        <Text>Visitor Name</Text>
+        <TextInput style={styles.textInput} value={form.visitorName} onChangeText={(value) => onInputChanged(value, "visitorName")}></TextInput>
+        <View style={{ height: 20 }}></View>
+        <Text>Date</Text>
+        <View style={{ flexDirection: "row", alignItems: "center" }}>
+          <TextInput style={styles.textInput, {width:150, fontSize:20}} editable={false} value={moment(form.visitDate).format("DD/MM/YYYY")}></TextInput>
+          <View>
+            <Button onPress={showDatepicker} title="Change date" />
+          </View>
+        </View>
+        <View style={{ height: 20 }}></View>
+        <Text>Time</Text>
+        <View style={{ flexDirection: "row", alignItems: "center" }}>
+          <TextInput style={styles.textInput , {width:150, fontSize:20}} editable={false} value={moment(form.visitDate).format("HH:mm:ss")}></TextInput>
+          <Button onPress={showTimepicker} title="Change time" />
+        </View>
+        <View style={{ height: 20 }}></View>
+        <Text>Plate Number</Text>
+        <TextInput style={styles.textInput} value={form.plateNumber} onChangeText={(value) => onInputChanged(value, "plateNumber")}></TextInput>
+        <View style={{ height: 20 }}></View>
+        <Text>
+          Unit Name
     </Text>
-      <TextInput style={{ borderWidth: 1 }} value={form.visitorName} onChangeText={(value) => onInputChanged(value, "visitorName")}></TextInput>
-      <View style={{ height: 20 }}></View>
-      <Text>
-        Date
-    </Text>
-      <TextInput style={{ borderWidth: 1 }} value={moment(form.visitDate).format("DD/MM/YYYY")}></TextInput>
-      <View>
-        <Button onPress={showDatepicker} title="Change date" />
-      </View>
-      <View style={{ height: 20 }}></View>
-      <Text>
-        Time
-    </Text>
-      <TextInput style={{ borderWidth: 1 }} value={moment(form.visitDate).format("HH:mm:ss")}></TextInput>
-      <Button onPress={showTimepicker} title="Change time" />
-      <View style={{ height: 20 }}></View>
-      <Text>
-        Plate Number
-    </Text>
-      <TextInput style={{ borderWidth: 1 }} value={form.plateNumber} onChangeText={(value) => onInputChanged(value, "plateNumber")}></TextInput>
-      <View style={{ height: 20 }}></View>
-      <Text>
-        Unit Name
-    </Text>
-      {/* <TextInput style={{ borderWidth: 1 }} value={form.unitName} onChangeText={(value) => onInputChanged(value, "unitName")}></TextInput> */}
-      <RNPickerSelect
-        onValueChange={(value) => onInputChanged(value, "unitId")}
-        items={community.units.map(obj => (
-          {
-            key: obj.id,
-            label: obj.name,
-            value: obj.id,
-            color: "rgba(0,0,0,1)",
-          }))}
-      />
-      <View style={{ height: 20 }}></View>
-      <Button onPress={sendData} title="Submit" />
-      {show && (
-        <DateTimePicker
-          testID="dateTimePicker"
-          value={form.visitDate}
-          mode={mode}
-          is24Hour={true}
-          display="default"
-          onChange={onDateChange}
+        {/* <TextInput style={{ borderWidth: 1 }} value={form.unitName} onChangeText={(value) => onInputChanged(value, "unitName")}></TextInput> */}
+        <RNPickerSelect
+          onValueChange={(value) => onInputChanged(value, "unitId")}
+          items={community.units.map(obj => (
+            {
+              key: obj.id,
+              label: obj.name,
+              value: obj.id,
+              color: "rgba(0,0,0,1)",
+            }))}
         />
-      )}
-      {/* <RNPickerSelect
+        <View style={{ height: 20 }}></View>
+        <Button onPress={sendData} title="Submit" />
+        {show && (
+          <DateTimePicker
+            testID="dateTimePicker"
+            value={form.visitDate}
+            mode={mode}
+            is24Hour={true}
+            display="default"
+            onChange={onDateChange}
+          />
+        )}
+        {/* <RNPickerSelect
         onValueChange={(value) => console.log(value)}
         items={[
           { label: 'Football', value: 'football' },
@@ -173,7 +169,7 @@ const VisitorAddScreen = ({ navigation }) => {
         ]}
       /> */}
 
-    </View>
+      </View>
     )
   }
 
@@ -193,7 +189,20 @@ const VisitorAddScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#EFECF4",
   },
+  content: {
+    alignSelf: "center",
+    justifyContent: "space-between",
+    backgroundColor: colors.white,
+    width: responsiveWidth(98),
+  },
+  textInput: {
+    height: 40,
+    borderColor: 'gray',
+    borderWidth: 1,
+    marginVertical: 5,
+    marginHorizontal: 5,
+    padding: 5
+  }
 });
 export default VisitorAddScreen;

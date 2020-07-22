@@ -23,6 +23,7 @@ const VisitorScreen = ({ navigation }) => {
     refetch: visitorRefetch,
   } = useQuery(QUERY_VISITOR_BY_HOST, {
     variables: { hostId: state.userId },
+    pollInterval: 1000,
     fetchPolicy: "network-only",
   });
 
@@ -39,6 +40,7 @@ const VisitorScreen = ({ navigation }) => {
     const onRefresh = () => {
       try {
         visitorRefetch();
+        console.log("refresh")
       } catch { }
     };
 
@@ -57,7 +59,6 @@ const VisitorScreen = ({ navigation }) => {
       visitorName,
       visitDate,
       plateNumber,
-      remarks,
       creator: {
         name: creatorName
       },
@@ -76,12 +77,10 @@ const VisitorScreen = ({ navigation }) => {
         visitorName={visitorName}
         visitDate={visitDate}
         plateNumber={plateNumber}
-        remarks={remarks}
         creatorName={creatorName}
         unitName={unitName}
         hostName={hostName}
       >
-
       </VisitorCard>
 
     );
@@ -104,7 +103,7 @@ const VisitorScreen = ({ navigation }) => {
           />
         )}
         style={styles.visitorList}
-        spacing={20}
+        spacing={5}
         renderItem={renderItem}
       />
     );

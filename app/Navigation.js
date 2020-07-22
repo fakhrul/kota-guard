@@ -428,14 +428,14 @@ const switchNavigator = createSwitchNavigator({
   userFlow: createDrawerNavigator(
     {
       homeFlow: createBottomTabNavigator({
-        dashboardFlow,
+        // dashboardFlow,
         //  stockFlow,
-         streamFlow,
+        //  streamFlow,
         myBillingFlow,
-        notificationFlow,
+        // notificationFlow,
         visitorFlow,
-         connectionFlow,
-         chatFlow,
+        //  connectionFlow,
+        //  chatFlow,
       }),
       profileFlow: createStackNavigator({
         Profile: MyProfileScreen,
