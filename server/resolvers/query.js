@@ -102,8 +102,8 @@ const resolvers = {
   service: (_, args) => promisify(Service.findById(args.id)).then((result) => result),
   visitorsByCommunity: (_, args) => promisify(Visitor.find({ community: args.communityId})).then((result) => result),
   visitorsByHost: (_, args) => promisify(Visitor.find({ host: args.hostId})).then((result) => result),
-  unit: (_, args) =>
-    promisify(Unit.findById(args.id)).then((result) => result),
+  visitor: (_, args) => promisify(Visitor.findById(args.id)).then((result) => result),
+  unit: (_, args) => promisify(Unit.findById(args.id)).then((result) => result),
 };
 
 module.exports = resolvers;

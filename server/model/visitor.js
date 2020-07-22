@@ -12,9 +12,9 @@ const schema = new Schema(
         plateNumber: {
             type: String,
         },
-        remarks: {
-            type: String,
-        },
+        // remarks: {
+        //     type: String,
+        // },
         community: {
             type: Schema.Types.ObjectId,
             ref: 'Community'
@@ -30,7 +30,11 @@ const schema = new Schema(
         host: {
             type: Schema.Types.ObjectId,
             ref: 'User'
-        }
+        },
+        remarks: [{
+            type: Schema.Types.ObjectId,
+            ref: 'Remarks'
+        }]
 
     },
     { timestamps: true }

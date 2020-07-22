@@ -51,6 +51,7 @@ import ServiceScreen from "./src/screens/ServiceScreen";
 import ServiceAddScreen from "./src/screens/ServiceAddScreen";
 import ServiceDetailScreen from "./src/screens/ServiceDetailScreen";
 import VisitorScreen from "./src/screens/VisitorScreen";
+import VisitorViewScreen from "./src/screens/VisitorViewScreen";
 import AppInfoScreen from "./src/screens/AppInfoScreen";
 import FeedbackScreen from "./src/screens/FeedbackScreen";
 import ResidentRegistrationScreen from "./src/screens/ResidentRegistrationScreen";
@@ -145,6 +146,7 @@ const settingFlow = createStackNavigator({
 
 const visitorFlow = createStackNavigator({
   Visitor: VisitorScreen,
+  VisitorView: VisitorViewScreen,
   VisitorAdd: VisitorAddScreen,
 });
 
@@ -253,8 +255,6 @@ visitorFlow.navigationOptions = {
   ),
 };
 
-
-
 VisitorScreen.navigationOptions = () => {
   return {
     headerShown: false,
@@ -265,6 +265,12 @@ VisitorAddScreen.navigationOptions = () => {
     headerShown: false,
   };
 };
+VisitorViewScreen.navigationOptions = () => {
+  return {
+    headerShown: false,
+  };
+};
+
 CommunityScreen.navigationOptions = () => {
   return {
     headerShown: false,

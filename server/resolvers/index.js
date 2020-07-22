@@ -14,8 +14,9 @@ import Notification from "./notification"
 import Community from "./community";
 import Service from "./service";
 import Visitor from "./visitor";
+import Remarks from "./remarks";
 
-const resolvers = {User, Post, Comment, LikePost, Query, Stock, Message, Chat, Notification,Community, Service, Mutation, Subscription, Visitor};
+const resolvers = {User, Post, Comment, LikePost, Query, Stock, Message, Chat, Notification,Community, Service, Mutation, Subscription, Visitor, Remarks};
 
 console.log(resolvers);
 module.exports = resolvers;

@@ -298,7 +298,15 @@ export const QUERY_VISITOR_BY_HOST = gql`
       visitorName
       visitDate
       plateNumber
-      remarks
+      remarks {
+        id
+        caption
+        body
+        author { 
+          id
+          name
+        }
+      }
       creator {
         name
       }
@@ -308,11 +316,38 @@ export const QUERY_VISITOR_BY_HOST = gql`
       host {
         name
       }
+      createdAt
     }
   }
 `;
 
 
-// export const QUERY_PAYMENT_BY_SERVICE = gql`
-//   query Payment($id: String)
-// `;
+export const QUERY_VISITOR = gql`
+  query Visitor($id: String!) {
+    visitor(id: $id) {
+      id
+      visitorName
+      visitDate
+      plateNumber
+      remarks {
+        id
+        caption
+        body        
+        author { 
+          id
+          name
+        }
+      }
+      creator {
+        name
+      }
+      unit {
+        name
+      }
+      host {
+        name
+      }
+      createdAt
+    }
+  }
+`;

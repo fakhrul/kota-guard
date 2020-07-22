@@ -15,6 +15,7 @@ const Community = require("../model/community");
 const Service = require("../model/service");
 const Unit = require("../model/unit");
 const Visitor = require("../model/visitor");
+const Remarks = require("../model/remarks");
 
 const addPost = (id, caption, uri, authorId) =>
   new Promise((resolve, reject) => {
@@ -664,11 +665,11 @@ const resolvers = {
   addUnit: (_, args) => {
     const unitId = mongoose.Types.ObjectId();
     Promise.all([
-        addNewUnit(unitId, args.communityId, args.code, args.name),
+      addNewUnit(unitId, args.communityId, args.code, args.name),
       pushUnitToCommunity(unitId, args.communityId),
     ]).then((result) => result[0]);
 
-  return Unit.findById(
+    return Unit.findById(
       { _id: unitId },
       async (error, found) => {
         if (error) throw new Error(error);
@@ -677,29 +678,66 @@ const resolvers = {
     );
 
   },
-  //    addVisitor(userId: $userId, communityId: $communityId, visitorName: $visitorName, visitDate: $visitDate, plateNumber: $plateNumber, remarks: $remarks, unitId: $unitId) {
-    addVisitor: (_, args) => {
-      return new Promise((resolve, reject) => {
-        const id = mongoose.Types.ObjectId();
-        Visitor.create(
-          {
-            _id: id,
-            community: args.communityId,
-            visitorName: args.visitorName,
-            visitDate: args.visitDate,
-            plateNumber: args.plateNumber,
-            remarks: args.remarks,
-            creator: args.userId,
-            unit: args.unitId,
-            host: args.hostId,
-          },
-          (err, result) => {
-            if (err) reject(err);
-            else resolve(result);
+  addVisitor: (_, args) => {
+    return new Promise((resolve, reject) => {
+      const id = mongoose.Types.ObjectId();
+      Visitor.create(
+        {
+          _id: id,
+          community: args.communityId,
+          visitorName: args.visitorName,
+          visitDate: args.visitDate,
+          plateNumber: args.plateNumber,
+          creator: args.userId,
+          unit: args.unitId,
+          host: args.hostId,
+        },
+        (err, result) => {
+          if (err) reject(err);
+          else resolve(result);
+        }
+      );
+    });
+  },
+  addRemarks: (_, args) => {
+    const result = new Promise((resolve, reject) => {
+      const id = mongoose.Types.ObjectId();
+      Remarks.create(
+        {
+          _id: id,
+          author: args.userId,
+          visitor: args.visitorId,
+          caption: args.caption,
+          body: args.body,
+        },
+        (err, result) => {
+          if (err) reject(err);
+          else {
+            // const notificationId = mongoose.Types.ObjectId();
+            // Notification.create(
+            //   {
+            //     _id: notificationId,
+            //     user: result.author._id,
+            //     actionUser: args.userId,
+            //     resourceId: args.postId,
+            //     type: "COMMENT",
+            //   },
+            //   (err, result) => { }
+            // );
+
+            resolve(result);
           }
-        );
-      });
-    },
+        }
+      );
+    });
+
+    // Visitor.findById(args.visitorId, function (err, visitor) {
+    //   if (!err) {
+    //     pubsub.publish("visitor", { visitor });
+    //   }
+    // });
+    return result;
+  },
 };
 
 export default resolvers;

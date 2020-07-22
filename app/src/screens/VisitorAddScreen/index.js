@@ -22,9 +22,8 @@ const VisitorAddScreen = ({ navigation }) => {
     visitorName: "",
     visitDate: new Date(1598051730000),
     plateNumber: "",
-    remarks: "",
     unitId: "",
-    communityId: state.communitId,
+    communityId: state.communityId,
     isLoading: false
   });
 
@@ -89,7 +88,6 @@ const VisitorAddScreen = ({ navigation }) => {
           visitorName: form.visitorName,
           visitDate: form.visitDate,
           plateNumber: form.plateNumber,
-          remarks: form.remarks,
           unitId: form.unitId
         },
       });
@@ -141,11 +139,6 @@ const VisitorAddScreen = ({ navigation }) => {
       <TextInput style={{ borderWidth: 1 }} value={form.plateNumber} onChangeText={(value) => onInputChanged(value, "plateNumber")}></TextInput>
       <View style={{ height: 20 }}></View>
       <Text>
-        Remarks
-    </Text>
-      <TextInput style={{ borderWidth: 1 }} value={form.remarks} onChangeText={(value) => onInputChanged(value, "remarks")}></TextInput>
-      <View style={{ height: 20 }}></View>
-      <Text>
         Unit Name
     </Text>
       {/* <TextInput style={{ borderWidth: 1 }} value={form.unitName} onChangeText={(value) => onInputChanged(value, "unitName")}></TextInput> */}
@@ -153,13 +146,13 @@ const VisitorAddScreen = ({ navigation }) => {
         onValueChange={(value) => onInputChanged(value, "unitId")}
         items={community.units.map(obj => (
           {
-             key: obj.id,
-             label: obj.name,
-             value: obj.id,
-             color: "rgba(0,0,0,1)",
+            key: obj.id,
+            label: obj.name,
+            value: obj.id,
+            color: "rgba(0,0,0,1)",
           }))}
       />
-            <View style={{ height: 20 }}></View>
+      <View style={{ height: 20 }}></View>
       <Button onPress={sendData} title="Submit" />
       {show && (
         <DateTimePicker

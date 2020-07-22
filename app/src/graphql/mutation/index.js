@@ -214,8 +214,24 @@ export const MUTATION_ADD_SERVICE = gql`
 `;
 
 export const MUTATION_ADD_VISITOR = gql`
-  mutation AddVisitor($userId: String!, $communityId: String!, $visitorName: String!, $visitDate: DateTime!, $plateNumber: String, $remarks: String, $unitId: String!, $hostId: String) {
-    addVisitor(userId: $userId, communityId: $communityId, visitorName: $visitorName, visitDate: $visitDate, plateNumber: $plateNumber, remarks: $remarks, unitId: $unitId, hostId: $hostId) {
+  mutation AddVisitor($userId: String!, $communityId: String!, $visitorName: String!, $visitDate: DateTime!, $plateNumber: String, $unitId: String!, $hostId: String) {
+    addVisitor(userId: $userId, communityId: $communityId, visitorName: $visitorName, visitDate: $visitDate, plateNumber: $plateNumber, unitId: $unitId, hostId: $hostId) {
+      id
+    }
+  }
+`;
+
+export const MUTATION_ADD_REMARKS = gql`
+  mutation AddRemarks($userId: String!, $visitorId: String!, $caption: String!, $body: String!) {
+    addRemarks(userId: $userId, visitorId: $visitorId, caption: $caption, body: $body) {
+      id
+    }
+  }
+`;
+
+export const MUTATION_DELETE_REMARKS = gql`
+  mutation DeleteRemarks($visitorId: String!, $remarksId: String!) {
+    deleteRemarks(visitorId: $visitorId, remarksId: $remarksId) {
       id
     }
   }

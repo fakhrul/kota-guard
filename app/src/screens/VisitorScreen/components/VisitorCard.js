@@ -8,9 +8,9 @@ import moment from "moment";
 import { responsiveWidth } from 'react-native-responsive-dimensions';
 
 
-const VisitorCard = ({ navigation, id, visitorName, visitDate, plateNumber, remarks, creatorName, unitName, hostName }) => {
+const VisitorCard = ({ navigation, id, visitorName, visitDate, plateNumber, creatorName, unitName, hostName }) => {
     const { state } = useContext(AuthContext);
-    const navigateToVisitor = () => navigation.navigate("VisitorView", { postId: id });
+    const navigateToVisitor = () => navigation.navigate("VisitorView", { visitorId: id });
 
     return (
         <TouchableOpacity
@@ -23,7 +23,6 @@ const VisitorCard = ({ navigation, id, visitorName, visitDate, plateNumber, rema
                 <Text>Name {visitorName}</Text>
                 <Text>Date {visitDate}</Text>
                 <Text>Plate {plateNumber}</Text>
-                <Text>Remarks {remarks}</Text>
                 <Text>Unit {unitName}</Text>
                 <Text>Creator {creatorName}</Text>
                 <Text>Host {hostName}</Text>

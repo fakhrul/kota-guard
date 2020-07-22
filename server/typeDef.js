@@ -82,7 +82,8 @@ const typeDefs = gql`
     addService(userId:  String!, communityId:  String!, name:  String!, amount:  String!,  description:  String) : Service!
     addUnit(userId:  String!, communityId:  String!, code: String!, name:  String!, residentId: String) : Unit
     updateUnit(id:  String!, name: String!) : Unit
-    addVisitor(userId: String!, communityId: String!, visitorName: String!, visitDate: DateTime!, plateNumber: String, remarks: String, unitId: String!, hostId: String) : Visitor!
+    addVisitor(userId: String!, communityId: String!, visitorName: String!, visitDate: DateTime!, plateNumber: String, unitId: String!, hostId: String) : Visitor!
+    addRemarks(userId: String!, visitorId: String!, caption: String!, body: String!): Remarks
   }
 
   type Stock {
@@ -151,12 +152,19 @@ const typeDefs = gql`
     visitorName: String!
     visitDate: DateTime!
     plateNumber: String
-    remarks: String
     unit: Unit!
     creator: User!
     community: Community!
     host: User!
+    remarks: [Remarks]
     createdAt: DateTime!
+  }
+  type Remarks {
+    id: ID!
+    caption: String!
+    body: String!
+    author: User!
+    visitor: String!
   }
   type Unit {
     id: ID!
