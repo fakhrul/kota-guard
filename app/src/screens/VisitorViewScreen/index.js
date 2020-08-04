@@ -13,6 +13,12 @@ import RemarksInput from "./components/RemarksInput";
 import { colors } from "../../utils";
 import { responsiveWidth } from 'react-native-responsive-dimensions';
 import moment from "moment";
+import {
+    FontAwesome,
+    FontAwesome5,
+    Ionicons,
+    MaterialCommunityIcons
+} from "@expo/vector-icons";
 
 const VisitorViewScreen = ({ navigation }) => {
     const { state } = useContext(AuthContext);
@@ -73,24 +79,64 @@ const VisitorViewScreen = ({ navigation }) => {
             },
         } = visitorData;
         // console.log(visitorData)
-const visitDateFormated= moment(visitDate).format("LLLL");
+        const visitDateFormated = moment(visitDate).format("LLLL");
 
         content = (
             < View style={styles.content}>
                 <View style={{ height: 20 }}></View>
-                <Text>Visitor Name</Text>
-                <TextInput style={styles.textInput} editable={false} value={visitorName} ></TextInput>
+                <Text>Visiting Time</Text>
 
-                <Text>Visit Date</Text>
-                <TextInput style={styles.textInput} editable={false} value={visitDateFormated} ></TextInput>
-                <Text>Plate Number</Text>
-                <TextInput style={styles.textInput} editable={false} value={plateNumber} ></TextInput>
-                <Text>Unit</Text>
-                <TextInput style={styles.textInput} editable={false} value={unitName} ></TextInput>
-                <Text>Hosted By</Text>
-                <TextInput style={styles.textInput} editable={false} value={hostName} ></TextInput>
-                <Text>Created By</Text>
-                <TextInput style={styles.textInput} editable={false} value={creatorName} ></TextInput>
+                <View style={styles.mainView}>
+                    <View style={styles.mainLogo}>
+                        <MaterialCommunityIcons
+                            name="calendar-today"
+                            size={35}
+                            color="#C4C4C4"
+                        ></MaterialCommunityIcons>
+                    </View>
+                    <Text style={styles.mainText, { fontSize: 15 }}>{visitDateFormated}</Text>
+                </View>
+                <Text>Visitor Details</Text>
+
+                <View style={styles.mainView}>
+                    <View style={styles.mainLogo}>
+                        <FontAwesome5
+                            name="walking"
+                            size={30}
+                            color="#C4C4C4"
+                        ></FontAwesome5>
+                    </View>
+                    <Text style={styles.mainText}>{visitorName}</Text>
+                </View>
+                <View style={styles.mainView}>
+                    <View style={styles.mainLogo}>
+                        <FontAwesome
+                            name="car"
+                            size={30}
+                            color="#C4C4C4"
+                        ></FontAwesome>
+                    </View>
+                    <Text style={styles.mainText}>{plateNumber}</Text>
+                </View>
+                <Text>Host Details</Text>
+
+                <View style={styles.mainView}>
+                    <View style={styles.mainLogo}>
+                        <FontAwesome5
+                            name="user-edit"
+                            size={30}
+                            color="#C4C4C4"
+                        ></FontAwesome5>
+                    </View>
+                    <Text style={styles.mainText}>{hostName}</Text>
+                </View>
+                <View style={styles.mainView}>
+                    <View style={styles.mainLogo}>
+                        <Ionicons name="ios-home" size={35} color="#C4C4C4" />
+                    </View>
+                    <Text style={styles.mainText}>{unitName}</Text>
+                </View>
+                <Text style={styles.creator}>Created By {creatorName} </Text>
                 <Remarks
                     navigation={navigation}
                     visitorId={visitorId}
@@ -130,7 +176,7 @@ const styles = StyleSheet.create({
     content: {
         alignSelf: "center",
         backgroundColor: colors.white,
-        width: responsiveWidth(98),
+        width: responsiveWidth(100),
     },
     textInput: {
         height: 40,
@@ -139,6 +185,10 @@ const styles = StyleSheet.create({
         marginVertical: 5,
         marginHorizontal: 5,
         padding: 5
-    }
+    },
+    mainView: { borderWidth: 1, borderRadius: 15, borderColor: "#C4C4C4", marginHorizontal: 10, marginVertical: 5, height: 50, flexDirection: "row", alignItems: "center", alignContent: "center" },
+    mainLogo: { height: 40, width: 40, alignContent: "center", alignSelf: "center", alignItems: "center", marginHorizontal: 10 },
+    mainText: { fontSize: 19, fontFamily: 'Roboto', fontWeight: "bold", alignSelf: "center" },
+
 });
 export default VisitorViewScreen;

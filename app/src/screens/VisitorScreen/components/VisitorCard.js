@@ -1,11 +1,17 @@
 import React, { useContext } from "react";
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
-import { NativeImage } from "../../../components";
+import { NativeImage } from "../../../components"; 2
 import { colors, parseLikes } from "../../../utils";
 import { AntDesign } from "@expo/vector-icons";
 import { Context as AuthContext } from "../../../context/AuthContext";
 import moment from "moment";
-import { responsiveWidth } from 'react-native-responsive-dimensions';
+import { responsiveWidth, responsiveHeight } from 'react-native-responsive-dimensions';
+import {
+    FontAwesome,
+    FontAwesome5,
+    Ionicons,
+    MaterialCommunityIcons
+} from "@expo/vector-icons";
 
 const VisitorCard = ({ navigation, id, visitorName, visitDate, plateNumber, creatorName, unitName, hostName }) => {
     const { state } = useContext(AuthContext);
@@ -19,12 +25,48 @@ const VisitorCard = ({ navigation, id, visitorName, visitDate, plateNumber, crea
             style={styles.container}
         >
             <View style={styles.content}>
-                <Text>Date: {visitDateFormated}</Text>
-                <Text>Visitor Name: {visitorName}</Text>
+                <View style={styles.mainView}>
+                    <View style={styles.mainLogo}>
+                        <FontAwesome5
+                            name="user-edit"
+                            size={30}
+                            color="#C4C4C4"
+                        ></FontAwesome5>
+                    </View>
+                    <Text style={styles.mainText}>{hostName}</Text>
+                </View>
+                <View style={styles.mainView}>
+                    <View style={styles.mainLogo}>
+
+                        <Ionicons name="ios-home" size={35} color="#C4C4C4" />
+
+                    </View>
+                    <Text style={styles.mainText}>{unitName}</Text>
+                </View>
+                <View style={styles.mainView}>
+                    <View style={styles.mainLogo}>
+                        <FontAwesome
+                            name="car"
+                            size={30}
+                            color="#C4C4C4"
+                        ></FontAwesome>
+                    </View>
+                    <Text style={styles.mainText}>{plateNumber}</Text>
+                </View>
+                <View style={styles.dateView}>
+                    <View style={styles.dateLogo}>
+                        <MaterialCommunityIcons
+                            name="calendar-today"
+                            size={20}
+                            color="#C4C4C4"
+                        ></MaterialCommunityIcons>
+                    </View>
+                    <Text style={styles.dateText}>{visitDateFormated}</Text>
+                </View>
+                {/* <Text>Visitor Name: {visitorName}</Text>
                 <Text>Car Plate No: {plateNumber}</Text>
                 <Text>Requested By: {creatorName}</Text>
-                <Text>Host Name: {hostName}</Text>
-                <Text>Destination: {unitName}</Text>
+                <Text>Destination: {unitName}</Text> */}
             </View>
         </TouchableOpacity>
     );
@@ -32,20 +74,25 @@ const VisitorCard = ({ navigation, id, visitorName, visitDate, plateNumber, crea
 
 const styles = StyleSheet.create({
     container: {
-        // height: responsiveWidth(90),
-        width: responsiveWidth(98),
+        height: 215,
+        width: responsiveWidth(100),
         alignSelf: "center",
         justifyContent: "space-between",
         backgroundColor: colors.black,
         overflow: "hidden",
         borderRadius: 0,
     },
-      content: {
+    content: {
         justifyContent: "center",
         padding: 16,
         backgroundColor: colors.white,
     },
-  
+    mainView: { height: 50, flexDirection: "row", alignItems: "center" },
+    mainLogo: { height: 40, width: 40, alignContent: "center", alignSelf: "center", alignItems: "center", marginHorizontal: 10 },
+    mainText: { fontSize: 19, fontFamily: 'Roboto', fontWeight: "bold" },
+    dateView: { height: 20, marginTop:10, flexDirection: "row", alignItems: "center" },
+    dateLogo: { height: 20, width: 20, alignContent: "center", alignSelf: "center", alignItems: "center", marginHorizontal: 10 },
+    dateText: { fontSize: 14, fontFamily: 'Roboto', fontStyle:"italic", color:"#C4C4C4" },
 });
 
 export default VisitorCard;
